@@ -14,6 +14,7 @@ export class UploadController {
   @Post('arquivo')
   @UseInterceptors(FileInterceptor('file'))
   async uploadFile(@UploadedFile() file: Express.Multer.File) {
+    
     console.log(file);
 
     return this.ocrService.parseImage(file.buffer);
