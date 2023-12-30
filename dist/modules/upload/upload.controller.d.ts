@@ -6,13 +6,14 @@ export declare class UploadController {
     private readonly orcService;
     constructor(uploadService: UploadService, orcService: OcrService);
     uploadFile(file: Express.Multer.File): Promise<{
-        data: {
-            path: string;
+        supabase: {
+            data: {
+                path: string;
+            };
+            error: null;
+        } | {
+            data: null;
+            error: import("@supabase/storage-js").StorageError;
         };
-        error: null;
-    } | {
-        data: null;
-        error: import("@supabase/storage-js").StorageError;
     }>;
-    private extractNumericValues;
 }

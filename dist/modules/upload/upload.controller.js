@@ -23,20 +23,9 @@ let UploadController = class UploadController {
         this.orcService = orcService;
     }
     async uploadFile(file) {
-        console.log("passei");
+        console.log("arquivo enviado para o supabase");
         const result = await this.uploadService.upload(file);
-        return result;
-    }
-    extractNumericValues(results) {
-        const numericValues = [];
-        const regex = /\d+(?:[.,]\d{0,2})?/g;
-        results.forEach((text) => {
-            let match;
-            while ((match = regex.exec(text)) !== null) {
-                numericValues.push(parseFloat(match[0].replace(',', '.')));
-            }
-        });
-        return numericValues;
+        return { supabase: result };
     }
 };
 __decorate([
