@@ -3,8 +3,16 @@ import { UploadService } from './upload.service';
 import { OcrService } from '../ocr/ocr.service';
 export declare class UploadController {
     private readonly uploadService;
-    private readonly ocrService;
-    constructor(uploadService: UploadService, ocrService: OcrService);
-    uploadFile(file: Express.Multer.File): Promise<string[]>;
+    private readonly orcService;
+    constructor(uploadService: UploadService, orcService: OcrService);
+    uploadFile(file: Express.Multer.File): Promise<{
+        data: {
+            path: string;
+        };
+        error: null;
+    } | {
+        data: null;
+        error: import("@supabase/storage-js").StorageError;
+    }>;
     private extractNumericValues;
 }

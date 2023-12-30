@@ -14,17 +14,21 @@ export class UploadController {
   @Post('arquivo')
   @UseInterceptors(FileInterceptor('file'))
   async uploadFile(@UploadedFile() file: Express.Multer.File) {
-    console.log(file);
+    console.log("passei");
 
-    const ocrResult = await this.orcService.parseImage(file.buffer);
-    console.log('Resultado do OCR:', ocrResult);
+    const result = await this.uploadService.upload(file);
 
-    // Adiciona a lógica para extrair os valores numéricos
-    const numericValues = this.extractNumericValues(ocrResult);
-    console.log('Valores Numéricos:', numericValues);
+    return result;
 
-    // Retorne o resultado do OCR ou os valores numéricos conforme necessário
-    return { message: 'Deu certo' };
+    // const ocrResult = await this.orcService.parseImage(file.buffer);
+    // console.log('Resultado do OCR:', ocrResult);
+
+    // // Adiciona a lógica para extrair os valores numéricos
+    // const numericValues = this.extractNumericValues(ocrResult);
+    // console.log('Valores Numéricos:', numericValues);
+
+    // // Retorne o resultado do OCR ou os valores numéricos conforme necessário
+    // return { message: 'Deu certo' };
 
   }
 

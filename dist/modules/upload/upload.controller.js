@@ -18,13 +18,14 @@ const platform_express_1 = require("@nestjs/platform-express");
 const upload_service_1 = require("./upload.service");
 const ocr_service_1 = require("../ocr/ocr.service");
 let UploadController = class UploadController {
-    constructor(uploadService, ocrService) {
+    constructor(uploadService, orcService) {
         this.uploadService = uploadService;
-        this.ocrService = ocrService;
+        this.orcService = orcService;
     }
     async uploadFile(file) {
-        console.log(file);
-        return this.ocrService.parseImage(file.buffer);
+        console.log("passei");
+        const result = await this.uploadService.upload(file);
+        return result;
     }
     extractNumericValues(results) {
         const numericValues = [];
