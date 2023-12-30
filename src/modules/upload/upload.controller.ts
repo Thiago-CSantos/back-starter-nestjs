@@ -7,17 +7,24 @@ import { OcrService } from '../ocr/ocr.service';
 export class UploadController {
   constructor(
     private readonly uploadService: UploadService,
-    private readonly ocrService: OcrService
+    private readonly orcService: OcrService
   ) { }
 
 
   @Post('arquivo')
   @UseInterceptors(FileInterceptor('file'))
   async uploadFile(@UploadedFile() file: Express.Multer.File) {
-    
     console.log(file);
 
-    return this.ocrService.parseImage(file.buffer);
+    const ocrResult = await this.orcService.parseImage(file.buffer);
+    console.log('Resultado do OCR:', ocrResult);
+
+    // Adiciona a lógica para extrair os valores numéricos
+    const numericValues = this.extractNumericValues(ocrResult);
+    console.log('Valores Numéricos:', numericValues);
+
+    // Retorne o resultado do OCR ou os valores numéricos conforme necessário
+    return { message: 'Deu certo' };
 
   }
 
