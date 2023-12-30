@@ -7,7 +7,7 @@ import { OcrService } from '../ocr/ocr.service';
 export class UploadController {
   constructor(
     private readonly uploadService: UploadService,
-    private readonly orcService: OcrService
+    private readonly ocrService: OcrService
   ) { }
 
 
@@ -16,15 +16,7 @@ export class UploadController {
   async uploadFile(@UploadedFile() file: Express.Multer.File) {
     console.log(file);
 
-    const ocrResult = await this.orcService.parseImage(file.buffer);
-    console.log('Resultado do OCR:', ocrResult);
-
-    // Adiciona a lógica para extrair os valores numéricos
-    const numericValues = this.extractNumericValues(ocrResult);
-    console.log('Valores Numéricos:', numericValues);
-
-    // Retorne o resultado do OCR ou os valores numéricos conforme necessário
-    return { ocrResult, numericValues };
+    return this.ocrService.parseImage(file.buffer);
 
   }
 
