@@ -9,10 +9,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UploadService = void 0;
 const common_1 = require("@nestjs/common");
 const supabase_js_1 = require("@supabase/supabase-js");
+const remove_bg_1 = require("remove.bg");
 let UploadService = class UploadService {
     async upload(file) {
-        const supabaseURL = "https://agcfldqdkvhbvmhaxzlx.supabase.co";
-        const supabaseKEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFnY2ZsZHFka3ZoYnZtaGF4emx4Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTcwMzk0MjU5NCwiZXhwIjoyMDE5NTE4NTk0fQ.tX-v_iJd5p1Pg9_QGM1q87lJMgiDijboAutkQRkgWXk";
+        const supabaseURL = process.env.SUPABASE_URL;
+        const supabaseKEY = process.env.SUPABASE_KEY;
         const supabase = (0, supabase_js_1.createClient)(supabaseURL, supabaseKEY, {
             auth: {
                 persistSession: false,
@@ -22,6 +23,48 @@ let UploadService = class UploadService {
             upsert: true,
         });
         return data;
+    }
+    async createURLTemp(filename) {
+        const supabaseURL = process.env.SUPABASE_URL;
+        const supabaseKEY = process.env.SUPABASE_KEY;
+        const supabase = (0, supabase_js_1.createClient)(supabaseURL, supabaseKEY, {
+            auth: {
+                persistSession: false,
+            }
+        });
+        const url = await supabase.storage
+            .from("youtube")
+            .createSignedUrl(filename, 700);
+        return url;
+    }
+    async backgroundRemove(url, filename) {
+        const supabaseURL = "https://agcfldqdkvhbvmhaxzlx.supabase.co";
+        const supabaseKEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFnY2ZsZHFka3ZoYnZtaGF4emx4Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTcwMzk0MjU5NCwiZXhwIjoyMDE5NTE4NTk0fQ.tX-v_iJd5p1Pg9_QGM1q87lJMgiDijboAutkQRkgWXk";
+        const apiKey = 'kEDXY16aK48wUPRRuNFcPBHz';
+        console.log(__dirname);
+        return (0, remove_bg_1.removeBackgroundFromImageUrl)({
+            url,
+            apiKey,
+            size: 'regular',
+            type: 'person',
+        })
+            .then((result) => {
+            const base64img = result.base64img;
+            const supabase = (0, supabase_js_1.createClient)(supabaseURL, supabaseKEY, {
+                auth: {
+                    persistSession: false,
+                }
+            });
+            const data = supabase.storage.from("youtube").upload(filename, Buffer.from(base64img, 'base64'), {
+                upsert: true,
+            });
+            console.log(data);
+            return "Remoção concluida do fundo";
+        })
+            .catch((errors) => {
+            console.log(JSON.stringify(errors));
+            throw new Error('Erro ao remover fundo');
+        });
     }
 };
 UploadService = __decorate([

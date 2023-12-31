@@ -27,6 +27,19 @@ let UploadController = class UploadController {
         const result = await this.uploadService.upload(file);
         return { supabase: result };
     }
+    createURL(filename) {
+        console.log(filename);
+        return this.uploadService.createURLTemp(filename);
+    }
+    backgroundRemove(newFilename, imageUrl) {
+        const imageURLBgRemove = this.uploadService.backgroundRemove(imageUrl, newFilename)
+            .then((message) => {
+            return { message };
+        })
+            .catch((error) => {
+            return { error: error.message };
+        });
+    }
 };
 __decorate([
     (0, common_1.Post)('arquivo'),
@@ -36,6 +49,21 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], UploadController.prototype, "uploadFile", null);
+__decorate([
+    (0, common_1.Get)('create-url/:filename'),
+    __param(0, (0, common_1.Param)('filename')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], UploadController.prototype, "createURL", null);
+__decorate([
+    (0, common_1.Post)('remover-fundo/:newFilename'),
+    __param(0, (0, common_1.Param)('newFilename')),
+    __param(1, (0, common_1.Body)('imageUrl')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, String]),
+    __metadata("design:returntype", void 0)
+], UploadController.prototype, "backgroundRemove", null);
 UploadController = __decorate([
     (0, common_1.Controller)('upload'),
     __metadata("design:paramtypes", [upload_service_1.UploadService,

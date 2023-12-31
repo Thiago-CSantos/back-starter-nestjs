@@ -1,7 +1,8 @@
-import { Controller, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { UploadService } from './upload.service';
 import { OcrService } from '../ocr/ocr.service';
+
 
 @Controller('upload')
 export class UploadController {
@@ -10,7 +11,7 @@ export class UploadController {
     private readonly orcService: OcrService
   ) { }
 
-// fazer pegar o link da image com supabase doc: https://supabase.com/dashboard/project/agcfldqdkvhbvmhaxzlx/api
+  // fazer pegar o link da image com supabase doc: https://supabase.com/dashboard/project/agcfldqdkvhbvmhaxzlx/api
   @Post('arquivo')
   @UseInterceptors(FileInterceptor('file'))
   async uploadFile(@UploadedFile() file: Express.Multer.File) {
@@ -21,11 +22,29 @@ export class UploadController {
     return { supabase: result };
   }
 
+  @Get('create-url/:filename')
+  createURL(@Param('filename') filename: string) {
+    console.log(filename);
+
+    return this.uploadService.createURLTemp(filename);
+  }
+
+  @Post('remover-fundo/:newFilename')
+  backgroundRemove(@Param('newFilename') newFilename: string, @Body('imageUrl') imageUrl: string) {
+    // const imageUrl = 'https://agcfldqdkvhbvmhaxzlx.supabase.co/storage/v1/object/sign/youtube/jhola.jpeg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJ5b3V0dWJlL2pob2xhLmpwZWciLCJpYXQiOjE3MDQwMjMyNDMsImV4cCI6MTcwNDYyODA0M30.rIw9F2-8-XXMFxpt8LoGfCV9P_TJcThebior8icRFIU&t=2023-12-31T11%3A47%3A04.138Z';
+
+    const imageURLBgRemove = this.uploadService.backgroundRemove(imageUrl, newFilename)
+      .then((message: string) => {
+        return { message };
+      })
+      .catch((error: Error) => {
+        return { error: error.message };
+      });
 
 
+  }
 
 
-  
 
   // const ocrResult = await this.orcService.parseImage(file.buffer);
   // console.log('Resultado do OCR:', ocrResult);

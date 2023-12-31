@@ -16,4 +16,14 @@ export declare class UploadController {
             error: import("@supabase/storage-js").StorageError;
         };
     }>;
+    createURL(filename: string): Promise<{
+        data: {
+            signedUrl: string;
+        };
+        error: null;
+    } | {
+        data: null;
+        error: import("@supabase/storage-js").StorageError;
+    }>;
+    backgroundRemove(newFilename: string, imageUrl: string): void;
 }
