@@ -8,7 +8,7 @@ async function bootstrap() {
 
   // Configurações CORS globais para todas as rotas
   const corsOptions: CorsOptions = {
-    origin: 'https://calm-teal-seagull-slip.cyclic.app',  // Altere para o domínio do seu cliente
+    origin: '*',  // Altere para o domínio do seu cliente
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
   };
