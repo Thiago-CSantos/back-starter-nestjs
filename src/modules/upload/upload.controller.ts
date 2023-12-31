@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Query, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, Param, Post, Query, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { UploadService } from './upload.service';
 import { OcrService } from '../ocr/ocr.service';
@@ -13,6 +13,7 @@ export class UploadController {
 
   // fazer pegar o link da image com supabase doc: https://supabase.com/dashboard/project/agcfldqdkvhbvmhaxzlx/api
   @Post('arquivo')
+  @HttpCode(201)
   @UseInterceptors(FileInterceptor('file'))
   async uploadFile(@UploadedFile() file: Express.Multer.File) {
 
