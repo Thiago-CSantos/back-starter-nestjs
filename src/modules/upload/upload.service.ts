@@ -9,8 +9,8 @@ export class UploadService {
 
       // upload no supabase
       async upload(file: Express.Multer.File) {
-            const supabaseURL = process.env.SUPABASE_URL;
-            const supabaseKEY = process.env.SUPABASE_KEY;
+            const supabaseURL = "https://agcfldqdkvhbvmhaxzlx.supabase.co";
+            const supabaseKEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFnY2ZsZHFka3ZoYnZtaGF4emx4Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTcwMzk0MjU5NCwiZXhwIjoyMDE5NTE4NTk0fQ.tX-v_iJd5p1Pg9_QGM1q87lJMgiDijboAutkQRkgWXk";
 
             const supabase = createClient(supabaseURL, supabaseKEY, {
                   auth: {
@@ -25,8 +25,8 @@ export class UploadService {
 
       // filename é o nome do arquivo la dentro do supabase "youtube/filename"
       async createURLTemp(filename: string) {
-            const supabaseURL = process.env.SUPABASE_URL;
-            const supabaseKEY = process.env.SUPABASE_KEY;
+            const supabaseURL = "https://agcfldqdkvhbvmhaxzlx.supabase.co";
+            const supabaseKEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFnY2ZsZHFka3ZoYnZtaGF4emx4Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTcwMzk0MjU5NCwiZXhwIjoyMDE5NTE4NTk0fQ.tX-v_iJd5p1Pg9_QGM1q87lJMgiDijboAutkQRkgWXk";
 
             const supabase = createClient(supabaseURL, supabaseKEY, {
                   auth: {
@@ -43,7 +43,7 @@ export class UploadService {
 
       async backgroundRemove(url: string, filename: string) {
             const supabaseURL = "https://agcfldqdkvhbvmhaxzlx.supabase.co";
-            const supabaseKEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFnY2ZsZHFka3ZoYnZtaGF4emx4Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTcwMzk0MjU5NCwiZXhwIjoyMDE5NTE4NTk0fQ.tX-v_iJd5p1Pg9_QGM1q87lJMgiDijboAutkQRkgWXk"
+            const supabaseKEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFnY2ZsZHFka3ZoYnZtaGF4emx4Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTcwMzk0MjU5NCwiZXhwIjoyMDE5NTE4NTk0fQ.tX-v_iJd5p1Pg9_QGM1q87lJMgiDijboAutkQRkgWXk";
 
             const apiKey = 'kEDXY16aK48wUPRRuNFcPBHz';
             console.log(__dirname);
