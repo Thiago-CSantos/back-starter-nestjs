@@ -49,32 +49,37 @@ export class UploadService {
 
             //const outputFile = path.resolve("C:/Users/thiag/Desktop/hahaha/starter-nestjs/src/modules/upload/imagens", 'img-removed-from-file.png');
 
-            return removeBackgroundFromImageUrl({
-                  url,
-                  apiKey,
-                  size: 'regular',
-                  type: 'person',
-                  //outputFile
-            })
-                  .then((result: RemoveBgResult) => {
-                        //console.log(`File saved to ${outputFile}`);
-                        const base64img = result.base64img;
-                        
-                        const supabase = createClient(supabaseURL, supabaseKEY, {
-                              auth: {
-                                    persistSession: false,
-                              }
-                        });
-                        const data = supabase.storage.from("youtube").upload(filename, Buffer.from(base64img, 'base64'), {
-                              upsert: true,
-                        });
-                        console.log(data);
-                        return data;
-                  })
-                  .catch((errors: RemoveBgError[]) => {
-                        console.log(JSON.stringify(errors));
-                        throw new Error('Erro ao remover fundo');
+            try {
+                  const result: RemoveBgResult = await removeBackgroundFromImageUrl({
+                        url,
+                        apiKey,
+                        size: 'regular',
+                        type: 'person',
                   });
+
+                  const base64img = result.base64img;
+
+                  const supabase = createClient(supabaseURL, supabaseKEY, {
+                        auth: {
+                              persistSession: false,
+                        }
+                  });
+
+                  const { data, error } = await supabase.storage.from("youtube").upload(filename, Buffer.from(base64img, 'base64'), {
+                        upsert: true,
+                  });
+
+                  if (error) {
+                        console.error('Erro ao fazer upload para o Supabase:', error);
+                        throw new Error('Erro ao remover fundo');
+                  }
+
+                  console.log('Upload para o Supabase concluído:', data);
+                  return "Remoção concluída do fundo";
+            } catch (error) {
+                  console.error('Erro ao remover fundo:', error);
+                  throw new Error('Erro ao remover fundo');
+            }
 
       }
 
