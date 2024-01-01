@@ -68,6 +68,7 @@ export class UploadService {
                   const { data, error } = await supabase.storage.from("youtube").upload(filename, Buffer.from(base64img, 'base64'), {
                         upsert: true,
                   });
+                  console.log(data);
 
                   if (error) {
                         console.error('Erro ao fazer upload para o Supabase:', error);
@@ -75,7 +76,7 @@ export class UploadService {
                   }
 
                   console.log('Upload para o Supabase concluído:', data);
-                  return "Remoção concluída do fundo";
+                  return {message: "Remoção concluída do fundo", data};
             } catch (error) {
                   console.error('Erro ao remover fundo:', error);
                   throw new Error('Erro ao remover fundo');
