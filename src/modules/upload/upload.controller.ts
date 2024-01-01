@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpCode, Param, Post, Query, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Get, Header, HttpCode, Param, Post, Query, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { UploadService } from './upload.service';
 import { OcrService } from '../ocr/ocr.service';
@@ -33,6 +33,7 @@ export class UploadController {
 
   @Post('remover-fundo/:newFilename')
   @HttpCode(201)
+  @Header('Access-Control-Allow-Origin', '*')
   async backgroundRemove(@Param('newFilename') newFilename: string, @Body('imageUrl') imageUrl: string) {
     // const imageUrl = 'https://agcfldqdkvhbvmhaxzlx.supabase.co/storage/v1/object/sign/youtube/jhola.jpeg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJ5b3V0dWJlL2pob2xhLmpwZWciLCJpYXQiOjE3MDQwMjMyNDMsImV4cCI6MTcwNDYyODA0M30.rIw9F2-8-XXMFxpt8LoGfCV9P_TJcThebior8icRFIU&t=2023-12-31T11%3A47%3A04.138Z';
     
