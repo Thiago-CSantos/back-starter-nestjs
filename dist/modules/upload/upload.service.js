@@ -41,7 +41,6 @@ let UploadService = class UploadService {
         const supabaseURL = "https://agcfldqdkvhbvmhaxzlx.supabase.co";
         const supabaseKEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFnY2ZsZHFka3ZoYnZtaGF4emx4Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTcwMzk0MjU5NCwiZXhwIjoyMDE5NTE4NTk0fQ.tX-v_iJd5p1Pg9_QGM1q87lJMgiDijboAutkQRkgWXk";
         const apiKey = 'kEDXY16aK48wUPRRuNFcPBHz';
-        console.log(__dirname);
         return (0, remove_bg_1.removeBackgroundFromImageUrl)({
             url,
             apiKey,
@@ -59,7 +58,7 @@ let UploadService = class UploadService {
                 upsert: true,
             });
             console.log(data);
-            return "Remoção concluida do fundo";
+            return data;
         })
             .catch((errors) => {
             console.log(JSON.stringify(errors));
