@@ -31,16 +31,12 @@ export class UploadController {
   }
 
   @Post('remover-fundo/:newFilename')
-  backgroundRemove(@Param('newFilename') newFilename: string, @Body('imageUrl') imageUrl: string) {
+  async backgroundRemove(@Param('newFilename') newFilename: string, @Body('imageUrl') imageUrl: string) {
     // const imageUrl = 'https://agcfldqdkvhbvmhaxzlx.supabase.co/storage/v1/object/sign/youtube/jhola.jpeg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJ5b3V0dWJlL2pob2xhLmpwZWciLCJpYXQiOjE3MDQwMjMyNDMsImV4cCI6MTcwNDYyODA0M30.rIw9F2-8-XXMFxpt8LoGfCV9P_TJcThebior8icRFIU&t=2023-12-31T11%3A47%3A04.138Z';
 
-    const imageURLBgRemove = this.uploadService.backgroundRemove(imageUrl, newFilename)
-      .then((message: string) => {
-        return { message };
-      })
-      .catch((error: Error) => {
-        return { error: error.message };
-      });
+    const imageURLBgRemove = await this.uploadService.backgroundRemove(imageUrl, newFilename)
+     
+    return imageURLBgRemove;
 
 
   }

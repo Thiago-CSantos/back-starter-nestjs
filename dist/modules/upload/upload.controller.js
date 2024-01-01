@@ -31,14 +31,9 @@ let UploadController = class UploadController {
         console.log(filename);
         return this.uploadService.createURLTemp(filename);
     }
-    backgroundRemove(newFilename, imageUrl) {
-        const imageURLBgRemove = this.uploadService.backgroundRemove(imageUrl, newFilename)
-            .then((message) => {
-            return { message };
-        })
-            .catch((error) => {
-            return { error: error.message };
-        });
+    async backgroundRemove(newFilename, imageUrl) {
+        const imageURLBgRemove = await this.uploadService.backgroundRemove(imageUrl, newFilename);
+        return imageURLBgRemove;
     }
 };
 __decorate([
@@ -63,7 +58,7 @@ __decorate([
     __param(1, (0, common_1.Body)('imageUrl')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String, String]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], UploadController.prototype, "backgroundRemove", null);
 UploadController = __decorate([
     (0, common_1.Controller)('upload'),
