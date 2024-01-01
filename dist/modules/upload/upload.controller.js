@@ -62,7 +62,6 @@ __decorate([
 ], UploadController.prototype, "createURL", null);
 __decorate([
     (0, common_1.Post)('remover-fundo/:newFilename'),
-    (0, common_1.HttpCode)(201),
     __param(0, (0, common_1.Param)('newFilename')),
     __param(1, (0, common_1.Body)('imageUrl')),
     __metadata("design:type", Function),
