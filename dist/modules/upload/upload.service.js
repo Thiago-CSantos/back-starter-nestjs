@@ -12,8 +12,8 @@ const supabase_js_1 = require("@supabase/supabase-js");
 const remove_bg_1 = require("remove.bg");
 let UploadService = class UploadService {
     async upload(file) {
-        const supabaseURL = process.env.SUPABASE_URL;
-        const supabaseKEY = process.env.SUPABASE_KEY;
+        const supabaseURL = "https://agcfldqdkvhbvmhaxzlx.supabase.co";
+        const supabaseKEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFnY2ZsZHFka3ZoYnZtaGF4emx4Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTcwMzk0MjU5NCwiZXhwIjoyMDE5NTE4NTk0fQ.tX-v_iJd5p1Pg9_QGM1q87lJMgiDijboAutkQRkgWXk";
         const supabase = (0, supabase_js_1.createClient)(supabaseURL, supabaseKEY, {
             auth: {
                 persistSession: false,
@@ -25,8 +25,8 @@ let UploadService = class UploadService {
         return data;
     }
     async createURLTemp(filename) {
-        const supabaseURL = process.env.SUPABASE_URL;
-        const supabaseKEY = process.env.SUPABASE_KEY;
+        const supabaseURL = "https://agcfldqdkvhbvmhaxzlx.supabase.co";
+        const supabaseKEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFnY2ZsZHFka3ZoYnZtaGF4emx4Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTcwMzk0MjU5NCwiZXhwIjoyMDE5NTE4NTk0fQ.tX-v_iJd5p1Pg9_QGM1q87lJMgiDijboAutkQRkgWXk";
         const supabase = (0, supabase_js_1.createClient)(supabaseURL, supabaseKEY, {
             auth: {
                 persistSession: false,
