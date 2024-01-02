@@ -49,38 +49,30 @@ export class UploadService {
 
             //const outputFile = path.resolve("C:/Users/thiag/Desktop/hahaha/starter-nestjs/src/modules/upload/imagens", 'img-removed-from-file.png');
 
-            try {
-                  const result: RemoveBgResult = await removeBackgroundFromImageUrl({
-                        url,
-                        apiKey,
-                        size: 'regular',
-                        type: 'person',
-                  });
+            const result: RemoveBgResult = await removeBackgroundFromImageUrl({
+                  url,
+                  apiKey,
+                  size: 'regular',
+                  type: 'person',
+            });
 
-                  const base64img = result.base64img;
+            const base64img = result.base64img;
 
-                  const supabase = createClient(supabaseURL, supabaseKEY, {
-                        auth: {
-                              persistSession: false,
-                        }
-                  });
+            const supabase = createClient(supabaseURL, supabaseKEY, {
+                  auth: {
+                        persistSession: false,
+                  }
+            });
 
-                  const { data, error } = await supabase.storage.from("youtube").upload(filename, Buffer.from(base64img, 'base64'), {
+            const data = await supabase.storage
+                  .from("youtube")
+                  .upload(filename, Buffer.from(base64img, 'base64'), {
                         upsert: true,
                   });
-                  console.log(data);
 
-                  if (error) {
-                        console.error('Erro ao fazer upload para o Supabase:', error);
-                        throw new Error('Erro ao remover fundo');
-                  }
+            console.log('Upload para o Supabase concluído:', data);
+            return data;
 
-                  console.log('Upload para o Supabase concluído:', data);
-                  return data;
-            } catch (error) {
-                  console.error('Erro ao remover fundo:', error);
-                  throw new Error('Erro ao remover fundo');
-            }
 
       }
 
