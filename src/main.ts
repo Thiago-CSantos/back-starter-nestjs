@@ -14,8 +14,7 @@ async function bootstrap() {
   //   preflightContinue: true,
   //   optionsSuccessStatus: 204
   // };
-  app.use(cors)
-  app.enableCors();
+  app.use(cors);
   await app.listen(3000);
 }
 bootstrap();
