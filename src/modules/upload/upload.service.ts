@@ -36,7 +36,7 @@ export class UploadService {
 
             const url = await supabase.storage
                   .from("youtube")
-                  .createSignedUrl(filename, 700);
+                  .createSignedUrl(filename, 70);
 
             return url;
       }
