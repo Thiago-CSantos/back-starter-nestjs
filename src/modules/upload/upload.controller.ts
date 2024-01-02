@@ -33,10 +33,10 @@ export class UploadController {
 
   @Post('remover-fundo/:newFilename')
   @HttpCode(201)
-  backgroundRemove(@Param('newFilename') newFilename: string, @Body('file') imageUrl: string) {
+  async backgroundRemove(@Param('newFilename') newFilename: string, @Body('file') imageUrl: string) {
     // const imageUrl = 'https://agcfldqdkvhbvmhaxzlx.supabase.co/storage/v1/object/sign/youtube/jhola.jpeg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJ5b3V0dWJlL2pob2xhLmpwZWciLCJpYXQiOjE3MDQwMjMyNDMsImV4cCI6MTcwNDYyODA0M30.rIw9F2-8-XXMFxpt8LoGfCV9P_TJcThebior8icRFIU&t=2023-12-31T11%3A47%3A04.138Z';
 
-    const result = this.uploadService.backgroundRemove(imageUrl, newFilename);
+    const result = await this.uploadService.backgroundRemove(imageUrl, newFilename);
 
     return {result};
   }
