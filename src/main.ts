@@ -2,7 +2,6 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { config } from 'dotenv';
 import { CorsOptions } from '@nestjs/common/interfaces/external/cors-options.interface';
-import * as cors from 'cors';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -14,7 +13,9 @@ async function bootstrap() {
   //   preflightContinue: true,
   //   optionsSuccessStatus: 204
   // };
-  app.use(cors);
+
+  app.enableCors();
+
   await app.listen(3000);
 }
 bootstrap();
