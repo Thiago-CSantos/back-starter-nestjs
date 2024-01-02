@@ -38,7 +38,7 @@ export class UploadController {
 
     const result = this.uploadService.backgroundRemove(imageUrl, newFilename);
 
-    return result;
+    return {result};
   }
 
 
