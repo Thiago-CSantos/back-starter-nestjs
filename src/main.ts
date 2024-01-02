@@ -8,7 +8,7 @@ async function bootstrap() {
 
   // Configurações CORS globais para todas as rotas
   const corsOptions: CorsOptions = {
-    origin: true,
+    origin: 'http://localhost:3000',
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     allowedHeaders: 'Content-Type, Accept',
     preflightContinue: true,
