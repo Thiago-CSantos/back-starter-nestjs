@@ -19,9 +19,12 @@ export declare class UploadService {
         error: import("@supabase/storage-js").StorageError;
     }>;
     backgroundRemove(url: string, filename: string): Promise<{
-        message: string;
         data: {
             path: string;
         };
+        error: null;
+    } | {
+        data: null;
+        error: import("@supabase/storage-js").StorageError;
     }>;
 }

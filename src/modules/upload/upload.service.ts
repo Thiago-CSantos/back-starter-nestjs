@@ -45,7 +45,7 @@ export class UploadService {
             const supabaseURL = "https://agcfldqdkvhbvmhaxzlx.supabase.co";
             const supabaseKEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFnY2ZsZHFka3ZoYnZtaGF4emx4Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTcwMzk0MjU5NCwiZXhwIjoyMDE5NTE4NTk0fQ.tX-v_iJd5p1Pg9_QGM1q87lJMgiDijboAutkQRkgWXk";
 
-            const apiKey = 'kEDXY16aK48wUPRRuNFcPBHz';
+            const apiKey = 'oajDyBBMXgx6idQuqULCSrNd';
 
             //const outputFile = path.resolve("C:/Users/thiag/Desktop/hahaha/starter-nestjs/src/modules/upload/imagens", 'img-removed-from-file.png');
 

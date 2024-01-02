@@ -5,6 +5,7 @@ export declare class UploadController {
     private readonly uploadService;
     private readonly orcService;
     constructor(uploadService: UploadService, orcService: OcrService);
+    private urlImag;
     uploadFile(file: Express.Multer.File): Promise<{
         supabase: {
             data: {
@@ -26,9 +27,12 @@ export declare class UploadController {
         error: import("@supabase/storage-js").StorageError;
     }>;
     backgroundRemove(newFilename: string, imageUrl: string): Promise<{
-        message: string;
         data: {
             path: string;
         };
+        error: null;
+    } | {
+        data: null;
+        error: import("@supabase/storage-js").StorageError;
     }>;
 }
