@@ -11,6 +11,8 @@ export class UploadController {
     private readonly orcService: OcrService
   ) { }
 
+  private urlImag: string;
+
   // fazer pegar o link da image com supabase doc: https://supabase.com/dashboard/project/agcfldqdkvhbvmhaxzlx/api
   @Post('arquivo')
   @HttpCode(201)
@@ -25,17 +27,19 @@ export class UploadController {
 
   @Get('create-url/:filename')
   @HttpCode(200)
-  createURL(@Param('filename') filename: string) {
+  async createURL(@Param('filename') filename: string) {
     console.log(filename);
 
-    return this.uploadService.createURLTemp(filename);
+    const signedUrl = await this.uploadService.createURLTemp(filename);
+    this.urlImag = signedUrl.data.signedUrl;
+    return signedUrl;
   }
 
   @Post('remover-fundo/:newFilename')
   @HttpCode(201)
-  async backgroundRemove(@Param('newFilename') newFilename: string, @Body('file') imageUrl: string) {
+  async backgroundRemove(@Param('newFilename') newFilename: string, imageUrl: string) {
     // const imageUrl = 'https://agcfldqdkvhbvmhaxzlx.supabase.co/storage/v1/object/sign/youtube/jhola.jpeg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJ5b3V0dWJlL2pob2xhLmpwZWciLCJpYXQiOjE3MDQwMjMyNDMsImV4cCI6MTcwNDYyODA0M30.rIw9F2-8-XXMFxpt8LoGfCV9P_TJcThebior8icRFIU&t=2023-12-31T11%3A47%3A04.138Z';
-
+    imageUrl = this.urlImag;
     return await this.uploadService.backgroundRemove(imageUrl, newFilename);
 
   }
