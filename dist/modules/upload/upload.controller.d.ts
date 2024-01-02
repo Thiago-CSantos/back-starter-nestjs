@@ -25,5 +25,10 @@ export declare class UploadController {
         data: null;
         error: import("@supabase/storage-js").StorageError;
     }>;
-    backgroundRemove(newFilename: string, imageUrl: string): void;
+    backgroundRemove(newFilename: string, imageUrl: string): Promise<{
+        message: string;
+        data: {
+            path: string;
+        };
+    }>;
 }

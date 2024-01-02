@@ -31,8 +31,8 @@ let UploadController = class UploadController {
         console.log(filename);
         return this.uploadService.createURLTemp(filename);
     }
-    backgroundRemove(newFilename, imageUrl) {
-        this.uploadService.backgroundRemove(imageUrl, newFilename)
+    async backgroundRemove(newFilename, imageUrl) {
+        return await this.uploadService.backgroundRemove(imageUrl, newFilename)
             .then((imageURLBgRemove) => {
             console.log('Resultado da remoção de fundo:', imageURLBgRemove);
             return imageURLBgRemove;
@@ -62,11 +62,13 @@ __decorate([
 ], UploadController.prototype, "createURL", null);
 __decorate([
     (0, common_1.Post)('remover-fundo/:newFilename'),
+    (0, common_1.HttpCode)(201),
+    (0, common_1.Header)('Access-Control-Allow-Origin', '*'),
     __param(0, (0, common_1.Param)('newFilename')),
     __param(1, (0, common_1.Body)('imageUrl')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String, String]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], UploadController.prototype, "backgroundRemove", null);
 UploadController = __decorate([
     (0, common_1.Controller)('upload'),
