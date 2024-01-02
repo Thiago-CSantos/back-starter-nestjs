@@ -76,7 +76,7 @@ export class UploadService {
                   }
 
                   console.log('Upload para o Supabase concluído:', data);
-                  return {message: "Remoção concluída do fundo", data};
+                  return data;
             } catch (error) {
                   console.error('Erro ao remover fundo:', error);
                   throw new Error('Erro ao remover fundo');
