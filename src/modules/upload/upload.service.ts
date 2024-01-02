@@ -64,7 +64,7 @@ export class UploadService {
                   }
             });
 
-            const data = supabase.storage
+            const data = await supabase.storage
                   .from("youtube")
                   .upload(filename, Buffer.from(base64img, 'base64'), {
                         upsert: true,
