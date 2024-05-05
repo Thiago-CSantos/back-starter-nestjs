@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Injectable } from '@nestjs/common';
 import { createClient } from '@supabase/supabase-js';
 import * as path from 'path';
@@ -36,7 +37,7 @@ export class UploadService {
 
             const url = await supabase.storage
                   .from("youtube")
-                  .createSignedUrl(filename, 70);
+                  .createSignedUrl(filename, 3600);
 
             return url;
       }
@@ -52,7 +53,7 @@ export class UploadService {
             const result: RemoveBgResult = await removeBackgroundFromImageUrl({
                   url,
                   apiKey,
-                  size: 'regular',
+                  size: 'auto',
                   type: 'person',
             });
 

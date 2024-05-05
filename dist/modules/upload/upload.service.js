@@ -34,7 +34,7 @@ let UploadService = class UploadService {
         });
         const url = await supabase.storage
             .from("youtube")
-            .createSignedUrl(filename, 700);
+            .createSignedUrl(filename, 70);
         return url;
     }
     async backgroundRemove(url, filename) {
@@ -44,7 +44,7 @@ let UploadService = class UploadService {
         const result = await (0, remove_bg_1.removeBackgroundFromImageUrl)({
             url,
             apiKey,
-            size: 'regular',
+            size: 'auto',
             type: 'person',
         });
         const base64img = result.base64img;
